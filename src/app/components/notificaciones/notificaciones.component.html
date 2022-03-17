@@ -1,0 +1,69 @@
+<br>
+<div class="div container">
+    <form class="row g-3">
+        <div class="col-auto">
+            <label for="staticEmail2" class="visually-hidden">Origen</label>
+            <input type="text" [(ngModel)]="origenEmail" (ngModelChange)="FiltroOrigen()" class="form-control-plaintext" id="staticEmail2" name="origen" value="{{origenEmail}}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" (click)="FiltroOrigen()">Enviar</button>
+        </div>
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Destinatario</th>
+                <th scope="col">Contenido</th>
+                <th scope="col">Asunto</th>
+                <th scope="col">Copia</th>
+                <th scope="col">Origen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listaNotificaciones">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.email}}</td>
+                <td>{{item.content}}</td>
+                <td>{{item.subject}}</td>
+                <td>{{item.cc}}</td>
+                <td>{{item.from}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Total de resultados : {{page.totalElements}}</p>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li *ngIf="page.number == 0" class="page-item disabled">
+                <a (click)="getPrimeraPagina();" class="page-link">Primero</a>
+            </li>
+            <li *ngIf="page.number >0" class="page-item ">
+                <a (click)="getPrimeraPagina();" class="page-link">Primero</a>
+            </li>
+            <li *ngIf="page.number == 0" class="page-item disabled">
+                <a (click)="previous();" class="page-link">Previous</a>
+            </li>
+            <li *ngIf="page.number >0" class="page-item ">
+                <a (click)="previous();" class="page-link">Previous</a>
+            </li>
+
+            <li *ngFor="let paginas of cantidad;  index as i;" #paginador class="page-item ">
+                <a class="page-link " (click)="numeroPaginador(paginas)">{{paginas}}</a>
+            </li>
+
+            <li *ngIf="estadoNextdeshabilitado" class="page-item disabled">
+                <a (click)="setNext();" class="page-link">Next</a>
+            </li>
+            <li *ngIf="!estadoNextdeshabilitado" class="page-item ">
+                <a (click)="setNext();" class="page-link">Next</a>
+            </li>
+            <li *ngIf="estadoNextdeshabilitado" class="page-item disabled">
+                <a (click)="getUltimaPagina();" class="page-link">Ultimo</a>
+            </li>
+            <li *ngIf="!estadoNextdeshabilitado" class="page-item ">
+                <a (click)="getUltimaPagina();" class="page-link">Ultimo</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
