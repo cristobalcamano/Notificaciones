@@ -31,7 +31,7 @@ export class NotificacionesComponent implements OnInit {
 
     ) { }
 
-  ngOnInit(): void {      
+  ngOnInit(): void {        
     this.getNotificaciones();
   }
 
